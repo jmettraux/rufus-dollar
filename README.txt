@@ -1,0 +1,70 @@
+
+= rufus-dollar
+
+A one-method library for substituting ${stuff} in text strings.
+
+
+== getting it
+
+    sudo gem install rufus-dollar
+
+or at
+
+http://rubyforge.org/frs/?group_id=4812
+
+
+== usage
+
+    require 'rubygems'
+    require 'rufus/dollar'
+
+    h = {
+        "name" => "Fred Brooks",
+        "title" => "Silver Bullet",
+        "left" => "na",
+        "right" => "me",
+    }
+
+    puts Rufus::dsub "${name} wrote '${title}'", h
+        # => "Fred Brooks wrote 'Silver Bullet'"
+
+    # dollar notations are nestable
+
+    puts Rufus::dsub "${${left}${right}}", h
+        # => "${name}" => "Fred Brooks"
+
+
+== dependencies
+
+None.
+
+
+== mailing list
+
+On the rufus-ruby list[http://groups.google.com/group/rufus-ruby] :
+
+    http://groups.google.com/group/rufus-ruby
+
+
+== issue tracker
+
+http://rubyforge.org/tracker/?atid=18584&group_id=4812&func=browse
+
+
+== source
+
+http://rufus.rubyforge.org/svn/trunk/dollar
+
+    svn checkout http://rufus.rubyforge.org/svn/trunk/dollar
+
+
+== author
+
+John Mettraux, jmettraux@gmail.com 
+http://jmettraux.wordpress.com
+
+
+== license
+
+MIT
+
