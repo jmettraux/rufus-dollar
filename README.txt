@@ -53,9 +53,9 @@ http://rubyforge.org/tracker/?atid=18584&group_id=4812&func=browse
 
 == source
 
-http://rufus.rubyforge.org/svn/trunk/dollar
+http://github.com/jmettraux/rufus-dollar
 
-    svn checkout http://rufus.rubyforge.org/svn/trunk/dollar
+    git clone git://github.com/jmettraux/rufus-dollar.git
 
 
 == author
