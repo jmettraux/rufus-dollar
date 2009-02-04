@@ -1,6 +1,10 @@
 
 = rufus-dollar CHANGELOG.txt
 
+== rufus-dollar - 1.0.2    released 2009/02/04
+
+- code cleanup
+
 
 == rufus-dollar - 1.0.1    released 2008/02/19
 

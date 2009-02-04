@@ -8,77 +8,73 @@
 #
 
 require 'test/unit'
-require 'rufus/dollar'
-require 'test_base'
+require File.dirname(__FILE__) + '/test_base'
 
-#
-# testing the 'dollar notation'
-#
 
 class DollarTest < Test::Unit::TestCase
-    include TestBase
+  include TestBase
 
-    #def setup
-    #end
+  #def setup
+  #end
 
-    #def teardown
-    #end
+  #def teardown
+  #end
 
-    def test_0
+  def test_0
 
-        dict = {}
+    dict = {}
 
-        dict['renard'] = 'goupil'
-        dict['cane'] = 'oie'
-        dict['oie blanche'] = 'poule'
+    dict['renard'] = 'goupil'
+    dict['cane'] = 'oie'
+    dict['oie blanche'] = 'poule'
 
-        dotest "le petit renard", dict, "le petit renard"
-        dotest "le petit {renard}", dict, "le petit {renard}"
-        dotest "le petit ${renard}", dict, "le petit goupil"
-        dotest "le petit ${renard} noir", dict, "le petit goupil noir"
+    dotest "le petit renard", dict, "le petit renard"
+    dotest "le petit {renard}", dict, "le petit {renard}"
+    dotest "le petit ${renard}", dict, "le petit goupil"
+    dotest "le petit ${renard} noir", dict, "le petit goupil noir"
 
-        dotest "la grande ${${cane} blanche}", dict, "la grande poule"
+    dotest "la grande ${${cane} blanche}", dict, "la grande poule"
 
-        dotest "le ${renard} et la ${cane}", dict, "le goupil et la oie"
-            #
-            # excuse my french...
+    dotest "le ${renard} et la ${cane}", dict, "le goupil et la oie"
+      #
+      # excuse my french...
 
-        dotest "le \\${renard} encore", dict, "le \\${renard} encore"
+    dotest "le \\${renard} encore", dict, "le \\${renard} encore"
 
-        dotest "", dict, ""
+    dotest "", dict, ""
 
-        dotest("""
+    dotest("""
 """, dict, """
 """)
-        dotest(""" 
+    dotest(""" 
 """, dict, """ 
 """)
-    end
+  end
 
-    def test_1
+  def test_1
 
-        dict = {}
-        dict['x'] = 'y'
+    dict = {}
+    dict['x'] = 'y'
 
-        dotest "${x}", dict, "y"
-        dotest "\\${x}", dict, "\\${x}"
-    end
+    dotest "${x}", dict, "y"
+    dotest "\\${x}", dict, "\\${x}"
+  end
 
-    def test_2
+  def test_2
 
-        dict = {}
-        dict['A'] = 'a'
-        dict['B'] = 'b'
-        dict['ab'] = 'ok'
+    dict = {}
+    dict['A'] = 'a'
+    dict['B'] = 'b'
+    dict['ab'] = 'ok'
 
-        dotest "${${A}${B}}", dict, "ok"
-    end
+    dotest "${${A}${B}}", dict, "ok"
+  end
 
-    #def test_3
-    #    assert_equal OpenWFE.unescape("toto and ${toto}"), "toto and ${toto}"
-    #    assert_equal OpenWFE.unescape("toto & \${toto}"), "toto & ${toto}"
-    #    assert_equal "toto & \\${toto}", "toto & ${toto}"
-    #    #assert_equal OpenWFE.unescape('toto & \${toto}'), "toto & ${toto}"
-    #end
+  #def test_3
+  #  assert_equal OpenWFE.unescape("toto and ${toto}"), "toto and ${toto}"
+  #  assert_equal OpenWFE.unescape("toto & \${toto}"), "toto & ${toto}"
+  #  assert_equal "toto & \\${toto}", "toto & ${toto}"
+  #  #assert_equal OpenWFE.unescape('toto & \${toto}'), "toto & ${toto}"
+  #end
 
 end
