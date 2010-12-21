@@ -20,7 +20,6 @@ class NestedTest < Test::Unit::TestCase
   #end
 
   def test_0
-
     dotest " ${a${b}e} ", {}, "  "
     dotest " ${a{b}e} ", {}, "  "
     dotest "${a{b}e}", {}, ""

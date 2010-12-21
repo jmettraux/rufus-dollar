@@ -1,6 +1,5 @@
-#
 #--
-# Copyright (c) 2006-2009, John Mettraux, jmettraux@gmail.com
+# Copyright (c) 2006-2011, John Mettraux, jmettraux@gmail.com
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -19,77 +18,85 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
+#
 #++
-#
-
-#
-# "made in Japan"
-#
-# John Mettraux at openwfe.org
-#
 
 
 module Rufus
 
-  #
   # Performs 'dollar substitution' on a piece of text with a given
   # dictionary.
   #
-  #   require 'rubygems'
-  #   require 'rufus/dollar'
+  # Please use Rufus::Dollar.dsub instead, this Rufus.dsub is kept
+  # for backward compatibility.
   #
-  #   h = {
-  #     "name" => "Fred Brooke",
-  #     "title" => "Silver Bullet"
-  #   }
-  #
-  #   puts Rufus::dsub "${name} wrote '${title}'", h
-  #     # => "Fred Brooke wrote 'Silver Bullet'"
-  #
-  def self.dsub (text, dict, offset=nil)
+  def self.dsub(text, dict)
 
-    text = text.to_s
+    Rufus::Dollar.dsub(text, dict)
+  end
 
-    j = text.index('}', offset || 0)
+  module Dollar
 
-    return text unless j
+    VERSION = '1.0.3'
 
-    t = text[0, j]
+    # Performs 'dollar substitution' on a piece of text with a given
+    # dictionary.
+    #
+    #   require 'rubygems'
+    #   require 'rufus/dollar'
+    #
+    #   h = {
+    #     "name" => "Fred Brooke",
+    #     "title" => "Silver Bullet"
+    #   }
+    #
+    #   puts Rufus::Dollar.dsub "${name} wrote '${title}'", h
+    #     # => "Fred Brooke wrote 'Silver Bullet'"
+    #
+    def self.dsub(text, dict, offset=nil)
 
-    i = t.rindex('${')
-    ii = t.rindex("\\${")
+      text = text.to_s
 
-    iii = t.rindex('{')
-    iii = nil if offset
+      j = text.index('}', offset || 0)
 
-    return text unless i
-    return dsub(text, dict, j+1) if (iii) and (iii-1 > i)
+      return text unless j
 
-    return unescape(text) if (i) and (i != 0) and (ii == i-1)
-      #
-      # found "\${"
+      t = text[0, j]
 
-    key = text[i+2..j-1]
+      i = t.rindex('${')
+      ii = t.rindex("\\${")
 
-    value = dict[key]
+      iii = t.rindex('{')
+      iii = nil if offset
 
-    value = if value
-      value.to_s
-    else
-      dict.has_key?(key) ? 'false' : ''
+      return text unless i
+      return dsub(text, dict, j+1) if (iii) and (iii-1 > i)
+
+      return unescape(text) if (i) and (i != 0) and (ii == i-1)
+        #
+        # found "\${"
+
+      key = text[i+2..j-1]
+
+      value = dict[key]
+
+      value = if value
+        value.to_s
+      else
+        dict.has_key?(key) ? 'false' : ''
+      end
+
+      pre = (i > 0) ? text[0..i-1] : ''
+
+      dsub("#{pre}#{value}#{text[j+1..-1]}", dict)
     end
 
-    pre = (i > 0) ? text[0..i-1] : ''
+    private
 
-    dsub("#{pre}#{value}#{text[j+1..-1]}", dict)
+    def self.unescape (text)
+
+      text.gsub("\\\\\\$\\{", "\\${")
+    end
   end
-
-  private
-
-  def self.unescape (text)
-
-    text.gsub("\\\\\\$\\{", "\\${")
-  end
-
 end
 

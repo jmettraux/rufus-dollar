@@ -6,7 +6,7 @@ A one-method library for substituting ${stuff} in text strings.
 
 == getting it
 
-  sudo gem install rufus-dollar
+  gem install rufus-dollar
 
 or at
 
