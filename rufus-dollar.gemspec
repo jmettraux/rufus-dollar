@@ -3,7 +3,7 @@
 Gem::Specification.new do |s|
 
   s.name = 'rufus-dollar'
-  s.version = '1.0.3'
+  s.version = `cat lib/rufus/dollar.rb | grep VERSION | sed "s/[^0-9\.]//g"`
   s.platform = Gem::Platform::RUBY
   s.authors = [ 'John Mettraux' ]
   s.email = [ 'jmettraux@gmail.com' ]

@@ -7,8 +7,6 @@ require 'rake'
 require 'rake/clean'
 require 'rake/rdoctask'
 
-require 'lib/rufus/dollar'
-
 
 #
 # clean
@@ -33,39 +31,15 @@ task :default => :spec
 #
 # gem
 
-GEM_VERSION = Rufus::Dollar::VERSION
+GEMSPEC_FILE = Dir['*.gemspec'].first
+GEMSPEC = eval(File.read(GEMSPEC_FILE))
+GEMSPEC.validate
 
-
-desc %{
-  synchronizes the version in the gemspec with the one in the project
-}
-task :update_version do
-
-  GEMSPEC_FILE = Dir['*.gemspec'].first
-
-  lines = File.readlines(GEMSPEC_FILE)
-
-  File.open(GEMSPEC_FILE, 'wb') do |f|
-    lines.each do |line|
-      f.puts(
-        line.match(/ s\.version /) ? "  s.version = '#{GEM_VERSION}'" : line)
-    end
-  end
-end
-
-desc %{
-  validates the gemspec
-}
-task :gemspec => :update_version do
-
-  GEMSPEC = eval(File.read(GEMSPEC_FILE))
-  GEMSPEC.validate
-end
 
 desc %{
   builds the gem and places it in pkg/
 }
-task :build => :gemspec do
+task :build do
 
   sh "gem build #{GEMSPEC_FILE}"
   sh "mkdir pkg" rescue nil
@@ -93,7 +67,7 @@ Rake::RDocTask.new do |rd|
 
   rd.rdoc_files.include('README.txt', 'CHANGELOG.txt', 'lib/**/*.rb')
 
-  rd.title = "rufus-dollar #{GEM_VERSION}"
+  rd.title = "#{GEMSPEC.name} #{GEMSPEC.version}"
 end
 
 
