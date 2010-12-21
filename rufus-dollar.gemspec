@@ -3,7 +3,7 @@
 Gem::Specification.new do |s|
 
   s.name = 'rufus-dollar'
-  s.version = `cat lib/rufus/dollar.rb | grep VERSION | sed "s/[^0-9\.]//g"`
+  s.version = File.read('lib/rufus/dollar.rb').match(/VERSION = '([^']+)'/)[1]
   s.platform = Gem::Platform::RUBY
   s.authors = [ 'John Mettraux' ]
   s.email = [ 'jmettraux@gmail.com' ]
@@ -14,7 +14,12 @@ Gem::Specification.new do |s|
 ${xxx} substitutions
   }
 
-  s.files = `git ls-files`.split("\n")
+  #s.files = `git ls-files`.split("\n")
+  s.files = Dir[
+    'Rakefile',
+    'lib/**/*.rb', 'spec/**/*.rb',
+    '*.gemspec', '*.txt', '*.rdoc', '*.md'
+  ]
 
   #s.add_runtime_dependency 'rufus-json', '>= 0.2.5'
 

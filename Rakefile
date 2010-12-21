@@ -13,8 +13,6 @@ require 'rake/rdoctask'
 
 CLEAN.include('pkg', 'rdoc')
 
-task :default => [ :clean ]
-
 
 #
 # test / spec
