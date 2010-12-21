@@ -17,7 +17,7 @@ ${xxx} substitutions
   #s.files = `git ls-files`.split("\n")
   s.files = Dir[
     'Rakefile',
-    'lib/**/*.rb', 'spec/**/*.rb',
+    'lib/**/*.rb', 'spec/**/*.rb', 'test/**/*.rb',
     '*.gemspec', '*.txt', '*.rdoc', '*.md'
   ]
 
