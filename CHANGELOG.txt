@@ -2,7 +2,7 @@
 = rufus-dollar CHANGELOG.txt
 
 
-== rufus-dollar - 1.0.3    not yet released
+== rufus-dollar - 1.0.3    released 2010/12/22
 
 - ${'key} and ${"key} produce '"value"'
 

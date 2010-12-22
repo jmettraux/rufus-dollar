@@ -33,6 +33,11 @@ http://rubyforge.org/frs/?group_id=4812
   puts Rufus::dsub "${${left}${right}}", h
     # => "${name}" => "Fred Brooks"
 
+  # prefixing the key with a ' or a " makes it quotable
+
+  puts Rufus::dsub "${name} wrote ${'title}", h
+    # => 'Fred Brooks wrote "Silver Bullet"'
+
 
 == dependencies
 
