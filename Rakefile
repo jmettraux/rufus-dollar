@@ -80,6 +80,6 @@ task :upload_rdoc => [ :clean, :rdoc ] do
   account = 'jmettraux@rubyforge.org'
   webdir = "/var/www/gforge-projects/rufus"
 
-  sh "rsync -azv -e ssh rdoc/rufus-dollar #{account}:#{webdir}/"
+  sh "rsync -azv -e ssh rdoc/#{GEMSPEC.name} #{account}:#{webdir}/"
 end
 
