@@ -92,5 +92,27 @@ describe Rufus::Dollar do
       end
     end
   end
+
+  context 'dollar bracket double-quote' do
+
+    let(:dict) do
+      {
+        'renard' => 'goupil',
+      }
+    end
+
+    describe '.dsub' do
+
+      it 'encloses in double-quotes when ${\'renard}' do
+
+        dsub("${'renard}").should == '"goupil"'
+      end
+
+      it 'encloses in double-quotes when ${"renard}' do
+
+        dsub('${"renard}').should == '"goupil"'
+      end
+    end
+  end
 end
 

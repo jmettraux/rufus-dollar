@@ -4,6 +4,8 @@
 
 == rufus-dollar - 1.0.3    not yet released
 
+- ${'key} and ${"key} produce '"value"'
+
 
 == rufus-dollar - 1.0.2    released 2009/02/04
 

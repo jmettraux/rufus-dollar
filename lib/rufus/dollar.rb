@@ -52,6 +52,14 @@ module Rufus
     #   puts Rufus::Dollar.dsub "${name} wrote '${title}'", h
     #     # => "Fred Brooke wrote 'Silver Bullet'"
     #
+    # == ${'key} or ${"key}
+    #
+    #   puts Rufus::Dollar.dsub "${name} wrote ${title}", h
+    #     # => "Fred Brooke wrote Silver Bullet"
+    #
+    #   puts Rufus::Dollar.dsub "${name} wrote ${'title}", h
+    #     # => 'Fred Brooke wrote "Silver Bullet"'
+    #
     def self.dsub(text, dict, offset=nil)
 
       text = text.to_s
@@ -76,14 +84,16 @@ module Rufus
         # found "\${"
 
       key = text[i+2..j-1]
+      quote = false
+
+      if m = key.match(/^['"](.+)$/)
+        key = m[1]
+        quote = true
+      end
 
       value = dict[key]
-
-      value = if value
-        value.to_s
-      else
-        dict.has_key?(key) ? 'false' : ''
-      end
+      value = value.nil? ? '' : value.to_s
+      value = value.inspect if quote
 
       pre = (i > 0) ? text[0..i-1] : ''
 
