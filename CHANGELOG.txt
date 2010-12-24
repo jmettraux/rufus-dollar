@@ -2,7 +2,7 @@
 = rufus-dollar CHANGELOG.txt
 
 
-== rufus-dollar - 1.0.4    not yet released
+== rufus-dollar - 1.0.4    released 2010/12/24
 
 - ${string} => string / ${array/hash} => array/hash .inspect
 
