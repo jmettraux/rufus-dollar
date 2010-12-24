@@ -17,7 +17,9 @@ describe Rufus::Dollar do
         'renard' => 'goupil',
         'cane' => 'oie',
         'oie blanche' => 'poule',
-        'x' => 'y'
+        'x' => 'y',
+        'customers' => %w[ alice bob ],
+        'table' => { 2011 => 2, 2012 => 7 }
       }
     end
 
@@ -63,6 +65,16 @@ describe Rufus::Dollar do
 
         dsub("le petit ${chien} suisse").should == "le petit  suisse"
       end
+
+      it "'inspects' arrays" do
+
+        dsub("the ${customers}").should == 'the ["alice", "bob"]'
+      end
+
+      it "'inspects' hashes" do
+
+        dsub("${table}").should == '{2011=>2, 2012=>7}'
+      end
     end
   end
 
@@ -97,7 +109,7 @@ describe Rufus::Dollar do
 
     let(:dict) do
       {
-        'renard' => 'goupil',
+        'renard' => 'goupil'
       }
     end
 
