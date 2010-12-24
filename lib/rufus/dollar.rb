@@ -36,7 +36,7 @@ module Rufus
 
   module Dollar
 
-    VERSION = '1.0.3'
+    VERSION = '1.0.4'
 
     # Performs 'dollar substitution' on a piece of text with a given
     # dictionary.
@@ -92,7 +92,15 @@ module Rufus
       end
 
       value = dict[key]
-      value = value.nil? ? '' : value.to_s
+
+      value = if value.nil?
+        ''
+      elsif value.is_a?(String)
+        value
+      else
+        value.inspect
+      end
+
       value = value.inspect if quote
 
       pre = (i > 0) ? text[0..i-1] : ''
