@@ -42,14 +42,14 @@ None.
 
 ## mailing list
 
-On the rufus-ruby list[http://groups.google.com/group/rufus-ruby] :
+The rufus-ruby list:
 
 http://groups.google.com/group/rufus-ruby
 
 
 ## issue tracker
 
-http://rubyforge.org/tracker/?atid=18584&group_id=4812&func=browse
+https://github.com/jmettraux/rufus-dollar/issues
 
 
 ## source
