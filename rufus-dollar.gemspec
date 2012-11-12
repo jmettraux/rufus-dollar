@@ -2,7 +2,11 @@
 Gem::Specification.new do |s|
 
   s.name = 'rufus-dollar'
-  s.version = File.read('lib/rufus/dollar.rb').match(/ VERSION = '([^']+)'/)[1]
+
+  s.version = File.read(
+    File.expand_path('../lib/rufus/dollar.rb', __FILE__)
+  ).match(/ VERSION *= *['"]([^'"]+)/)[1]
+
   s.platform = Gem::Platform::RUBY
   s.authors = [ 'John Mettraux' ]
   s.email = [ 'jmettraux@gmail.com' ]
