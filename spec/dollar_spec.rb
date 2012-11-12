@@ -5,7 +5,7 @@
 # Tue Dec 21 15:48:43 JST 2010
 #
 
-require File.join(File.dirname(__FILE__), 'spec_base')
+require 'spec_helper'
 
 
 describe Rufus::Dollar do
